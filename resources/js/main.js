@@ -28,7 +28,7 @@ function openDocs() {
     Function to open a tutorial video on Neutralino's official YouTube channel in the default web browser.
 */
 function openTutorial() {
-    Neutralino.os.open("https://www.youtube.com/c/CodeZri");
+  Neutralino.os.open("https://www.youtube.com/c/CodeZri");
 }
 
 /*
@@ -100,3 +100,11 @@ if (NL_OS != "Darwin") {
 
 // Display app information
 showInfo();
+
+// 
+(async () => {
+  const config = await Neutralino.app.getConfig();
+
+  // print 'Hello"'.
+  console.log(config.globalVariables.TEST1);
+})();
