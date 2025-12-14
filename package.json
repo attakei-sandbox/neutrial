@@ -1,0 +1,11 @@
+{
+  "name": "neutrial",
+  "private": true,
+  "devDependencies": {
+    "@neutralinojs/neu": "^11.6.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
