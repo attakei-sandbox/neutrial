@@ -8,13 +8,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: '${{ matrix.platform.label }}-latest'
     strategy:
       matrix:
-        os:
-          - 'win'
-          - 'mac'
-          - 'linux'
+        platform:
+          - label: 'windows'
+            target: 'win'
+          - label: 'macos'
+            target: 'mac'
+          - label: 'linux'
+            target: 'linux'
     steps:
       - uses: actions/checkout@v6
       - uses: 'aquaproj/aqua-installer@a0f344b9b469334c1b4341f706abbd9ef1b99ca1'
@@ -25,12 +28,12 @@ jobs:
           bun install
           bun neu update
       - name: 'Build executable'
-        run: './scripts/build-${{ matrix.os }}.sh'
+        run: './scripts/build-${{ matrix.platform.target }}.sh'
         env:
           CMD_NEU: 'bun neu'
       - name: 'Upload artifact'
         uses: actions/upload-artifact@v6
         with:
-          name: ${{ matrix.os }}
-          path: 'dist/${{ matrix.os }}*'
+          name: ${{ matrix.platform.label }}
+          path: 'dist/${{ matrix.platform.target }}*'
           retention-days: 7
